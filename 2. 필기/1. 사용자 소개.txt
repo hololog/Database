@@ -1,0 +1,4 @@
+<Linux User 소개>
+- root(pw : oracle01) : 관리자 권한 소유
+- oracle(pw : oracle) : /home/oracle 디렉토리 권한
+		   /u01/app/oracle 디렉토리 권한
