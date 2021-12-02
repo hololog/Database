@@ -19,7 +19,7 @@ SQL> conn hr/hr
 3. Linux 로그인 : username - Oracle / password - oracle
 4. 터미널창 열기(바탕화면에서 우클릭)
 5. 리스너 활성화		$] lsnrctl start
-6. SQL Plus 실행 		$] sqlplus /nolog
+6. SQL Plus 실행 		$] sqlplus /nolog 로그인없이 접속
 7. DB에 SYS 로그인		SQL> conn sys/oracle as sysdba
 8. DB 시작		SQL> startup
 9. DB에 HR 로그인		SQL> conn hr/hr
