@@ -1,4 +1,25 @@
 <Linux User 소개>
 - root(pw : oracle01) : 관리자 권한 소유
 - oracle(pw : oracle) : /home/oracle 디렉토리 권한
-		   /u01/app/oracle 디렉토리 권한
+	           	/u01/app/oracle 디렉토리 권한
+
+<Database User 소개>
+- sys(pw : oracle) : sysdba(dba + DB 생성 + DB시작/종료) 권한 소유
+SQL> conn sys/oracle as sysdba
+
+- system(pw : oracle) : dba 권한 소유
+SQL> conn system/oracle
+
+- hr(pw : hr) : object 생성 및 운영 권한 소유
+SQL> conn hr/hr
+
+<수업 전 DB 시작 및 사용자 접속 절차>
+1. Virtual Box 실행
+2. "ORCL" 가상 PC 시작
+3. Linux 로그인 : username - Oracle / password - oracle
+4. 터미널창 열기(바탕화면에서 우클릭)
+5. 리스너 활성화		$] lsnrctl start
+6. SQL Plus 실행 		$] sqlplus /nolog
+7. DB에 SYS 로그인		SQL> conn sys/oracle as sysdba
+8. DB 시작		SQL> startup
+9. DB에 HR 로그인		SQL> conn hr/hr
