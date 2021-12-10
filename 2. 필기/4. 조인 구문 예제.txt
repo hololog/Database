@@ -1,0 +1,29 @@
+desc employees
+
+select employee_id, last_name, salary, department_id
+from employees
+where employee_id > 200
+order by employee_id desc;
+
+col last_name format a20
+col department_name format a20
+--------------------------------------------------------------
+select employee_id, last_name, 
+       employees.department_id, department_name
+from employees join departments
+on employees.department_id = departments.department_id;
+(==)
+select employees.employee_id, employees.last_name, 
+       employees.department_id, departments.department_name
+from employees join departments
+on employees.department_id = departments.department_id;
+(==)
+select e.employee_id, e.last_name, 
+       e.department_id, d.department_name
+from employees e join departments d
+on e.department_id = d.department_id;
+-------------------------------------------------------------
+select d.department_id, d.department_name, l.city
+from departments d join locations l
+on d.location_id = l.location_id;
+-------------------------------------------------------------
