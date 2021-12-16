@@ -9,3 +9,7 @@ select ---;
 insert ---;
 update ---;
 delete ---;
+
+<데이터제어어(DCL)> => 작업단위 : User의 권한
+grant ---;
+revoke ---;
