@@ -1,0 +1,48 @@
+<WHERE절(조건절)>
+- 테이블로부터 특정행만 출력하기 위한 조건절
+
+select 컬럼명1, 컬럼명2
+from 테이블명
+where  좌변  =  우변 ;
+     (컬럼명)  (리터럴값)
+
+<비교연산자>
+단일행비교연산자	vs	다중행비교연산자
+=			in => (=, OR)
+>, >=
+<, <=
+<>, !=
+---------------------------------------------------
+=		<-->	<>, !=
+>, >=		<-->	<, <=
+between A and B	<-->	not between A and B
+in => (=,OR)	<-->	not in => (<>,AND)
+like		<-->	not like
+is null		<-->	is not null
+
+<Like 비교연산자>
+% : 0 char 또는 여러개 char
+_ : 반드시 1 char
+
+a로 시작되는 문자열 : 'a%'
+a가 포함된 문자열 : '%a%'
+a로 끝나는 문자열 : '%a'
+두번째 문자가 a인 문자열 : '_a%'
+끝에서 세번째 문자가 a인 문자열 : '%a__'
+
+<예제>
+1. employees 테이블로부터 employee_id, last_name,
+salary, commission_pct를 출력하되 커미션을 받는 사원만
+출력하시오.
+SQL> select employee_id, last_name, 
+            salary, commission_pct
+     from employees
+     where commission_pct is not null;
+
+2. employees 테이블로부터 employee_id, last_name,
+salary, commission_pct를 출력하되 커미션을 받지 않는
+사원만 출력하시오.
+SQL> select employee_id, last_name, 
+            salary, commission_pct
+     from employees
+     where commission_pct is null;
