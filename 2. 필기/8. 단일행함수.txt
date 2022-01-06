@@ -5,9 +5,9 @@
 2.숫자함수 : round, trunc, mod
 3.날짜함수 : sysdate, months_between, add_months,
 	   next_day, last_day, round, trunc
-4.변환함수
-5.일반함수
-
+4.변환함수 : to_char, to_date, to_number
+5.일반함수 : nvl, nvl2, nullif, coalesce
+-----------------------------------------------------------
 <<문자조작함수>>
 1.concat(expr1, expr2)
 -두 인수를 연결해주는 함수
@@ -47,7 +47,17 @@
 -문자열(expr2)로부터 특정문자(expr1)가 접두어/접미어에 있다면
  삭제(절단)해주는 함수
 (ex1) trim('H' from 'HHelloHWoHrldHHH') => elloHWoHrld
+-------------------------------------------------------
+<to_number 예제>
+<emp>
+ (num)  (char)  (char)
+emp_id | name | salary
+-----------------------
+100	 King	$17,000
+101	 Abel	$24,000
+102	 Bell	 $9,000
+...	 ...	...
 
-
-
-
+select emp_id, name, 12 * to_number(salary, '$999,999') as ansal
+from emp; 
+-----------------------------------------------------------
