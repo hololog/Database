@@ -1,0 +1,44 @@
+<그룹함수의 특징>
+- avg, sum, min, max, count 등
+- null값은 제외하고 작업함!!!
+
+<Count 함수>
+- count(*) : null O, 중복값 O
+- count(expr) : null X, 중복값 O
+- count(distinct expr) : null X, 중복값 X
+
+<employees>
+emp_id	| last_name | salary | commission_pct | department_id
+--------------------------------------------------------------
+100	  King		3000	.1		10
+101	  Abel		5000  			20
+102	  Dehaan	4000	.2		10
+103	  Whalen	2500			10
+104	  Bell		4500	.1		20
+
+//employees 테이블에 있는 전체 사원들이 소속된 부서의 수
+select count(distinct department_id)
+from employees;			=> 2
+
+//10번 부서에 소속된 사원 중 커미션을 받는 사원의 수
+select count(commission_pct)
+from employees
+where department_id = 10;	=> 결과값 : 2
+
+//10번 부서에 소속된 사원의 수
+select count(*)
+from employees
+where department_id = 10;  	=> 결과값 : 3
+--------------------------------------------------------------
+(Quiz)
+employees테이블로부터 전체 사원의 커미션 평균을 출력하는 구문을 작성하시오.
+[결과]	avg_comm
+	--------
+	 OOOOOO
+[정답]
+select avg(nvl(commission_pct, 0)) as avg_comm
+from employees;
+
+[오답] 커미션을 받는 사원들의 커미션 평균!
+select avg(commission_pct) as avg_comm
+from employees;
