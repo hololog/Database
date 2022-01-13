@@ -1,0 +1,28 @@
+<5장 연습문제 풀이>
+1. 
+select e.employee_id, e.last_name, e.salary,
+       e.department_id, d.department_name
+from employees e join departments d
+on e.department_id = d.department_id;
+(==)
+select e.employee_id, e.last_name, e.salary,
+       d.department_id, d.department_name
+from employees e join departments d
+on e.department_id = d.department_id;
+
+2.
+select e1.last_name as "Employee", e1.employee_id as "Emp#",
+       e2.last_name as "Manager", e1.manager_id as "Mgr#"
+from employees e1 join employees e2
+on e1.manager_id = e2.employee_id;
+(==)
+select e1.last_name as "Employee", e1.employee_id as "Emp#",
+       e2.last_name as "Manager", e2.employee_id as "Mgr#"
+from employees e1 join employees e2
+on e1.manager_id = e2.employee_id;
+
+[오답]
+select e1.last_name as "Employee", e1.employee_id as "Emp#",
+       e2.last_name as "Manager", e2.manager_id as "Mgr#"
+from employees e1 join employees e2
+on e1.manager_id = e2.employee_id;
