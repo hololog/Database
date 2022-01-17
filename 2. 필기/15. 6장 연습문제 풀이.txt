@@ -1,0 +1,7 @@
+<6장 연습문제 풀이>
+1. 
+select employee_id, last_name, salary
+from employees
+where salary >= (select avg(salary)
+		 from employees)
+order by salary;
