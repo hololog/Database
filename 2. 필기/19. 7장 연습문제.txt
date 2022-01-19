@@ -1,0 +1,33 @@
+<7장 연습문제>
+//트랜잭션 시작
+3. insert (첫번째 행)
+4. insert (두번째 행)
+5. select (미리보기)
+6. insert + 치환변수(&)
+   => (세번째 행)
+   => SQL> save /home/oracle/load_emp.sql
+7. load_emp.sql을 활용한 insert (네번째 행)
+   => SQL> @/home/oracle/load_emp.sql
+8. select (미리보기)
+9. commit;
+//트랜잭션 종료
+
+//트랜잭션 시작
+10. update
+11. update
+12. select (미리보기)
+13. delete
+14. select (미리보기)
+15. commit;
+//트랜잭션 종료
+
+//트랜잭션 시작
+16. load_emp.sql을 활용한 insert (다섯번째 행)
+17. select (미리보기)
+18. savepoint 생성
+19. delete (모든행 삭제)
+20. select (미리보기)
+21. savepoint 지점으로 롤백
+22. select (미리보기)
+23. commit;
+//트랜잭션 종료
