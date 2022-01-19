@@ -1,0 +1,13 @@
+<치환변수>
+SQL> select employee_id, last_name, salary, department_id
+     from employees
+     where department_id = &deptno;
+
+SQL> insert into departments
+     values (&dept_id, '&dept_name', &mgr_id, &loc_id);
+
+<스크립트 파일 저장 및 실행>
+-SQL Developer : 저장하기 => [file] - [저장] 또는 [저장] 아이콘(디스켓 모양 아이콘)
+		 불러오기 => [file] - [열기] 또는 [열기] 아이콘(폴더 여는 모양 아이콘)
+-SQL Plus : 저장하기 => SQL> save /home/oracle/new_dept.sql
+	    불러오기 => SQL> @/home/oracle/new_dept.sql
