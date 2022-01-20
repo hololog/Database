@@ -1,0 +1,61 @@
+
+<제약조건을 사용하는 목적>
+- 테이블에 부적합한 데이터가 들어오는 것을 방지하기 위한 목적
+
+<제약조건 선언 시기>
+- 테이블 생성 시 : create table ----;
+- 테이블 생성 후 : alter table ----;
+
+<제약조건 유형>
+- primary key : 기본키 제약조건, not null + unique의 성격을 모두 가지는 제약조건
+		즉, 컬럼에 null값과 중복값이 들어오는 것을 막아주는 제약조건
+		(★)테이블 당 한번만 선언할 수 있음!
+		컬럼 레벨의 문법, 테이블 레벨의 문법 다 사용 가능함
+<학생>
+ 학번  | 이름  |	주민번호	|  전화번호  | 학년  | 학과  | 메일
+--------------------------------------------------------	 
+  nn     nn       nn          nn      nn     nn
+  uk              uk          uk                    uk	   
+  ↓
+  pk(주민번호, 전화번호 같은 개인정보가 저장된 컬럼을 기본키로 설정하는거 권장하지 않음!)
+
+- foreign key : 외래키 제약조건
+		자기자신 테이블이나 다른 테이블의 특정 컬럼(pk, uk 제약조건이 선언된 컬럼)을
+		참조하는 제약조건
+		컬럼 레벨의 문법, 테이블 레벨의 문법 다 사용 가능함
+
+- unique : 컬럼에 중복된 데이터가 들어오는 것을 막아주는 제약조건
+	   즉, 고유한 값만 들어갈 수 있는 제약조건
+	   주민등록번호, 전화번호, 메일주소 등의 컬럼에 사용됨
+	   컬럼 레벨의 문법, 테이블 레벨의 문법 다 사용 가능함
+
+- not null : 컬럼에 null값이 들어오는 것을 막아주는 제약조건
+	     필수정보 컬럼에 not null 제약조건 선언함
+	     컬럼 레벨의 문법만 가능함
+
+- check : 해당 컬럼이 만족해야하는 조건문을 자유롭게 지정하는 제약조건
+          컬럼 레벨의 문법, 테이블 레벨의 문법 다 사용 가능함 => 문법 차이 없음!
+  (ex1) salary number(10) constraint OOO check (salary > 0),
+        (==)
+	salary number(10),
+	constraint OOO check (salary > 0),
+  (ex2) 주민번호 varchar2(13) constraint OOO check (length(주민번호) = 13),
+	(==)
+	주민번호 varchar2(13),
+	constraint OOO check (length(주민번호) = 13),
+  (ex3) 성별 varchar2(10) constraint OOO check (성별 = '남' or 성별 = '여'),
+	(==)
+	성별 varchar2(10) constraint OOO check (성별 in ('남', '여')),
+	(==)
+	성별 varchar2(10),
+	constraint OOO check (성별 in ('남', '여')),
+
+<제약조건 선언 시 제약조건명 부여>
+-사용자(개발자) 지정 : 고유하고 의미있는 제약조건명 부여(권장사항)
+		   (ex) 테이블약자_컬럼약자_제약조건유형약자
+			dept_deptid_pk
+			emp_deptid_fk
+			emp_email_uk
+			dept_dname_nn
+			emp_sal_ck
+-사용자(개발자) 생략 : DBMS가 고유한 제약조건명을 자동으로 부여(sys_xxx)
