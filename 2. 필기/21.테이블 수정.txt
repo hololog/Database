@@ -1,0 +1,47 @@
+<테이블 수정 - alter table ---;>
+1. 컬럼 추가, 제약조건 추가
+alter table 테이블명
+add -----;
+
+2. 컬럼 수정(데이터타입, 컬럼사이즈, default 등), 제약조건 추가
+alter table 테이블명
+modify -----;
+
+3. 컬럼 삭제, 제약조건 삭제
+alter table 테이블명
+drop -----;
+================================================================
+<테이블 생성 후 제약조건 추가>
+1. column level 문법 - pk, fk, uk, ck, nn
+alter table 테이블명
+modify 컬럼명 constraint 제약조건명 제약조건유형;
+
+2. table level 문법 - pk, fk, uk, ck
+alter table 테이블명
+add constraint 제약조건명 제약조건유형(컬럼명);
+================================================================
+<제약조건 삭제>
+alter table 테이블명
+drop constraint 제약조건명;
+
+//primary key 제약조건만 해당됨!
+alter table 테이블명
+drop primary key;
+
+//primary key, unique 제약조건 삭제 시 사용되는 옵션
+alter table 테이블명
+drop primary key cascade;
+
+alter table 테이블명
+drop constraint 제약조건명 cascade;
+================================================================
+<컬럼명 변경>
+alter table 테이블명
+rename column 기존컬럼명 to 새컬럼명;
+
+<제약조건명 변경>
+alter table 테이블명
+rename constraint 기존제약조건명 to 새제약조건명;
+
+<테이블명 변경>
+rename 기존테이블명 to 새테이블;
