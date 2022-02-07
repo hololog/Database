@@ -1,0 +1,31 @@
+1. user_constraints
+- 테이블에 선언된 제약조건명, 제약조건유형, 조건문(ck), 참조하는 곳의 제약조건명(fk) 조회
+- 아쉬운점 : 제약조건이 선언된 컬럼명을 확인 안됨!
+SQL> select constraint_name, constraint_type,
+            search_condition, r_constraint_name
+     from user_constraints
+     where lower(table_name) = lower('&t_name');  => search_cons.sql
+
+2. user_cons_columns
+- 테이블에 선언된 제약조건명을 컬럼과 매치해서 조회
+- 아쉬운점 : 제약조건의 상세한 정보(제약조건유형, 조건문 등) 조회 안됨!
+SQL> select column_name, constraint_name
+     from user_cons_columns
+     where lower(table_name) = lower('&t_name');  => cons1.sql
+======================================================================
+(Quiz) user_constraints와 user_cons_columns 데이터딕셔너리뷰를 조인해서
+다음 결과를 출력하는 구문을 작성하시오.
+- 쿼리구문 실행 시 테이블명을 입력 받아야 함.
+- 테이블명 입력 시 대소문자 상관없이 결과가 나와야 함.
+- 작성된 쿼리구문을 저장 => /home/oracle/cons2.sql
+
+[출력] 
+column_name | constraint_name | constraint_type | search_condition | r_constraint_name
+
+SQL> select c1.column_name, c1.constraint_name, c2.constraint_type,
+	    c2.search_condition, c2.r_constraint_name
+     from user_cons_columns c1 join user_constraints c2
+     on c1.constraint_name = c2.constraint_name
+     where lower(c1.table_name) = lower('&t_name');
+
+SQL> save /home/oracle/cons2.sql

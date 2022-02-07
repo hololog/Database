@@ -1,0 +1,19 @@
+<Data Dictionary 구성요소>
+1. Base tables
+- DB의 모든 정보를 Oracle이 보기 쉬운 형태로 기록해 놓은 테이블
+
+2. Data dictionary views
+- Base table을 사용자가 보기 쉬운 형태로 만들어 놓은 뷰
+- 읽기전용(select만 가능함)
+- Data dictionary views 유형
+  1) user_xxx : 사용자가 소유한 객체 정보 조회
+		ex) user_tables, user_views,
+		    user_sequences, user_users 등...
+  2) all_xxx : 사용자가 소유하거나 접근 가능한 객체 정보 조회
+	       ex) all_tables, all_views, all_sequences 등..
+  3) dba_xxx : DB의 모든 정보 조회, DBA만 select 가능함, 실시간 X
+	       ex) dba_users, dba_tables, dba_views,
+		   dba_data_files 등..
+  4) v$xxx : DB의 모든 정보 조회, DBA만 select 가능함
+	     동적성능뷰 => 실시간 O
+	     ex) v$session, v$datafile 등..
