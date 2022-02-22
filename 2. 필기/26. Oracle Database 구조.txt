@@ -60,9 +60,10 @@ SQL 실행속도(응답속도) = 실행계획 + 정보수집 + 실행(작업)
 - 순환형으로 관리됨
 
 [B/G proc]
-1. PMON
-2. SMON
-3. DBWR
-4. LGWR
-5. CKPT
-6. ARC(option)
+1. PMON - User proc fail 시 트랜잭션 롤백 및 선점하고 있던 자원/Lock 해제함.
+2. SMON - Instance fail(=DB 비정상종료) 후 DB 재시작 시 DB 동기화를 맞춰줌.
+3. DBWR - 체크포인트 발생 시 DB buffer cache의 Dirty block을 Datafile로 기록함.
+4. LGWR - 커밋(commit) 발생 시 Redo log buffer의 로그를 Redo log file로 기록함.
+5. CKPT - 체크포인트 발생 시 DBWR에게 알려줌.
+6. ARC(option) - DB가 Archive log mode인 경우 활성화됨.
+		 Redologfile에 로그스위치 발생 시 Offline 복사본을 생성함.
