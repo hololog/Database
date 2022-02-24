@@ -1,0 +1,27 @@
+<Oracle Software>
+1. SQL Plus
+- 터미널 환경의 tool
+- 쿼리구문을 입력/실행/결과를 볼 수 있는 프로그램
+- DBA, 개발자
+
+2. SQL Developer
+- 그래픽 환경의 tool
+- 쿼리구문을 입력/실행/결과를 볼 수 있는 프로그램
+- 추가로 설치해야 함
+- 개발자
+
+3. DBCA
+- 그래픽 환경의 tool
+- 데이터베이스를 생성/삭제하는 프로그램
+
+4. EM
+- 웹브라우저 환경의 tool
+- 데이터베이스를 관리하는 프로그램
+- DBA
+- 주소 : https://localhost:1158/em
+	           ↓        ↓
+             DB가 존재하는   DB의 고유 포트번호
+	Server PC의 Host명
+               (IP주소)
+- 로그인 : Username : sys / Password : oracle
+         'as sysdba' 체크 후 로그인
