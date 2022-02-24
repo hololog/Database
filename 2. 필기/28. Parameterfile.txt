@@ -1,0 +1,14 @@
+<Parameterfile>
+- 위치 : $ORACLE_HOME/dbs
+- 이름 : spfileSID.ora
+- 특징 : binary file, dynamic file
+- 조회 : SQL> show parameter db_block_size
+- 변경 : SQL> alter system set db_cache_size = 512M scope = memory ;
+							   both (default)
+							   spfile
+- scope 옵션 1) memory : 현재 DB에 반영 O, Spfile에는 반영 X
+			지금만 사용하고, DB가 재시작될때 원래값으로 되돌아감.
+	    2) both : 현재 DB에도 반영 O, spfile에도 반영 O
+		      지금부터 계속해서 변경함.(default)
+	    3) spfile : 현재 DB에는 반영 X, spfile에만 반영 O
+			DB 재시작 시부터 적용하겠다.
