@@ -1,0 +1,86 @@
+1.
+CREATE TABLE member_OOO
+(member_id NUMBER(10) CONSTRAINT member_member_id_pk PRIMARY KEY,
+last_name VARCHAR2(25) CONSTRAINT member_last_name_nn NOT NULL,
+first_name VARCHAR2(25),
+address VARCHAR2(100),
+city VARCHAR2(30),
+phone VARCHAR2(15),
+join_date DATE DEFAULT SYSDATE CONSTRAINT member_join_date_nn NOT NULL);
+
+-테이블 구조 확인 SQL> desc member_OOO
+-제약조건 조회 SQL> select constraint_name, constraint_type, search_condition, r_constraint_name
+                    	   from user_constraints
+                    	   where table_name = 'MEMBER_OOO';
+------------------------------------------------------------------------------------------------------------------------------------------
+2. 
+CREATE TABLE title_OOO
+(title_id NUMBER(10) CONSTRAINT title_title_id_pk PRIMARY KEY,
+title VARCHAR2(60) CONSTRAINT title_title_nn NOT NULL,
+description VARCHAR2(400) CONSTRAINT title_description_nn NOT NULL,
+rating VARCHAR2(4) CONSTRAINT title_rating_ck CHECK (rating IN ('G', 'PG', 'R', 'NC17', 'NR')),
+category VARCHAR2(20) CONSTRAINT title_category_ck CHECK (category IN ('DRAMA', 'COMEDY', 'ACTION','CHILD', 'SCIFI', 'DOCUMENTARY')),
+release_date DATE);
+
+-테이블 구조 확인 SQL> desc title_OOO
+-제약조건 조회 SQL> select constraint_name, constraint_type, search_condition, r_constraint_name
+                    	   from user_constraints
+                   	   where table_name = 'TITLE_OOO';
+------------------------------------------------------------------------------------------------------------------------------------------
+3. 
+CREATE TABLE title_copy_OOO
+(copy_id NUMBER(10),
+title_id NUMBER(10) CONSTRAINT title_copy_title_if_fk REFERENCES title_OOO(title_id),
+status VARCHAR2(15) CONSTRAINT title_copy_status_nn NOT NULL
+                    CONSTRAINT title_copy_status_ck CHECK (status IN ('AVAILABLE', 'DESTROYED','RENTED', 'RESERVED')),
+CONSTRAINT title_copy_copy_id_title_id_pk PRIMARY KEY (copy_id, title_id));
+
+-테이블 구조 확인 SQL> desc title_copy_OOO
+-제약조건 조회 SQL> select constraint_name, constraint_type, search_condition, r_constraint_name
+                   	   from user_constraints
+                    	   where table_name = 'TITLE_COPY_OOO';
+------------------------------------------------------------------------------------------------------------------------------------------
+4. 
+CREATE TABLE rental_OOO
+(book_date DATE DEFAULT SYSDATE,
+member_id NUMBER(10) CONSTRAINT rental_member_id_fk REFERENCES member_OOO(member_id),
+copy_id NUMBER(10),
+act_ret_date DATE,
+exp_ret_date DATE DEFAULT SYSDATE + 2,
+title_id NUMBER(10),
+CONSTRAINT rental_book_date_copy_title_pk PRIMARY KEY (book_date, member_id, copy_id,title_id),
+CONSTRAINT rental_copy_id_title_id_fk FOREIGN KEY (copy_id, title_id) REFERENCES title_copy_OOO(copy_id, title_id));
+
+-테이블 구조 확인 SQL> desc rental_OOO
+-제약조건 조회 SQL> select constraint_name, constraint_type, search_condition, r_constraint_name
+                   	   from user_constraints
+                    	   where table_name = 'RENTAL_OOO';
+------------------------------------------------------------------------------------------------------------------------------------------
+5. 
+CREATE TABLE reservation_OOO
+(res_date DATE,
+member_id NUMBER(10) CONSTRAINT reservation_member_id REFERENCES member_OOO(member_id),
+title_id NUMBER(10) CONSTRAINT reservation_title_id REFERENCES title_OOO(title_id),
+CONSTRAINT reservation_resdate_mem_tit_pk PRIMARY KEY(res_date, member_id, title_id));
+
+-테이블 구조 확인 SQL> desc reservation_OOO
+-제약조건 조회 SQL> select constraint_name, constraint_type, search_condition, r_constraint_name
+                    	   from user_constraints
+                    	   where table_name = 'reservation_OOO';
+------------------------------------------------------------------------------------------------------------------------------------------
+6. 
+select employee_id, last_name, salary
+from employees
+where salary > (select avg(salary)
+	        from employees)
+order by salary desc;
+------------------------------------------------------------------------------------------------------------------------------------------
+7. 
+select last_name, salary, (12*salary)+(12*salary*nvl(commission_pct,0)) an_sal
+from employees;
+------------------------------------------------------------------------------------------------------------------------------------------
+8.
+select e.employee_id, e.last_name, salary, e.department_id, d.department_name
+from employees e join departments d
+on e.department_id = d.department_id
+where e.department_id between 10 and 30;
