@@ -1,0 +1,29 @@
+<Controlfile 다중화 절차>
+1. DB 추가
+SQL> alter system set control_files = 
+'/u01/app/oracle/oradata/ORCL/controlfile/o1_mf_fwvn95xm_.ctl',
+'/u01/app/oracle/fast_recovery_area/orcl/ORCL/controlfile/o1_mf_fwvn96cd_.ctl',
+'/home/oracle/control_OOO.ctl' scope = spfile;
+
+2. DB 종료
+SQL> shut immediate
+
+3. OS 추가
+SQL> !
+$] cd /u01/app/oracle/oradata/ORCL/controlfile
+$] ls
+$] cp o1_mf_fwvn95xm_.ctl /home/oracle/control_OOO.ctl
+$] cd /home/oracle
+$] ls              => control_OOO.ctl 존재 여부 확인
+$] exit
+
+4. DB 시작
+SQL> startup   => error!(nomount O, mount X) 
+	       => SQL> show parameter control_files   // 오타 확인!
+               => 1번 -> 2번 -> 4번
+
+5. 확인(DB가 open되야 확인 가능함!!!)
+SQL> select name
+     from v$controlfile;    => 3개의 controlfile 확인!
+
+

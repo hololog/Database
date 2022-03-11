@@ -1,0 +1,28 @@
+<저장공간 관련 용어>
+- tablespace : 논리적인 저장영역 구조
+	       반드시 하나 이상의 Datafile을 품고 있어야 함.
+               Datafile의 사이즈가 곧 T/S의 사이즈가 됨.
+- datafile : 실제 Data가 저장된 물리적인 저장영역 구조
+	     
+<저장공간 추가 방법>
+1. 새 T/S 생성(= Datafile 생성)
+SQL> create tablespace appuser
+     datafile '/u01/app/oracle/oradata/ORCL/datafile/appuser01.dbf' size 50M
+     autoextend on next 10M maxsize 500M;
+
+2. 기존 T/S에 Datafile을 추가
+SQL> alter tablespace appuser
+     add datafile '/u01/app/oracle/oradata/ORCL/datafile/appuser02.dbf' size 30M;
+
+3. 기존 Datafile의 사이즈 늘리기
+SQL> alter database datafile '/u01/app/oracle/oradata/ORCL/datafile/appuser01.dbf'
+     resize 80M;
+
+4. Datafile에 자동확장 기능 설정
+SQL> alter database datafile '/u01/app/oracle/oradata/ORCL/datafile/appuser02.dbf
+     autoextend on next 10M;
+
+<저장공간 삭제 방법>
+SQL> drop tablespace appuser
+     including contents [and datafiles]
+     [cascade constraints];

@@ -1,0 +1,8 @@
+(Quiz) v$tablespace와 v$datafile 데이터딕셔너리뷰를 조인해서
+다음과 같은 정보를 출력하는 구문을 작성하시오.
+
+[결과] T/S name | Datafile name
+
+SQL> select t.name as "T/S name", d.name as "Datafile name"
+     from v$datafile d join v$tablespace t
+     on d.ts# = t.ts#;

@@ -1,0 +1,38 @@
+<Database fail 유형>
+1. Statement fail
+- DB에 발생된 SQL구문이 정상적으로 실행되지 않고 오류가 발생된 경우
+- 원인 : 문법 오류, 오타, 권한 부족, 저장공간 부족 등
+- 해결 : SQL구문 재작성, 권한 부여, 저장공간 추가 등
+
+2. User proc fail
+- DB에 접속된 User가 비정상적으로 접속을 종료한 경우
+- 원인 : User가 직접 비정상 종료를 함, DBA로부터 Kill을 당한 경우,
+        Client PC가 다운된 경우 등
+- 해결 : User가 재접속하면 됨
+        (User proc fail 시 PMON이 롤백 및 Lock 해제함)
+
+3. Network fail
+- DB가 정상적으로 켜져있는데 접속이 되지 않는 경우
+- 원인 : 리스너가 껴져있는 경우, 네트워크 문제인 경우
+- 해결 : 리스너 켜기(DB 재시작도 해야함), 네트워크 문제 해결(네트워크 관리자 역할)
+
+4. User error
+- DB에 발생된 SQL구문이 정상적으로 실행이 되었으나 잘못된 작업을 진행한 경우
+- 원인 : 잘못된 DML을 실행한 경우, 잘못된 DDL을 실행한 경우 등
+- 해결 : 커밋하기 전이면 롤백하면 됨, 커밋한 후이면 반대의 작업을 다시 해야함,
+        휴지통으로부터 삭제된 테이블 되돌리기 등
+
+5. Instance fail
+- DB가 비정상적으로 종료되는 경우
+- 원인 : DBA가 shut abort로 DB를 비정상종료한 경우, 
+        Instance 내 필수 구성요소 중 문제가 발생된 경우,
+        정전, Server PC 다운된 경우 등
+- 해결 : DB 재시작하면 됨
+        (DB 비정상종료 후 재시작 시 SMON이 DB 동기화 맞춰줌)
+
+6. Media fail
+- DB를 구성하는 필수 물리적인 파일 중 하나가 손실/손상된 경우
+  (Datafile, Controlfile, Redologfile)
+- 원인 : 운영체제에서 DB 관련 파일을 삭제함
+- 해결 : Datafile => 백업 파일로부터 복구
+        Controlfile, Redologfile => 다중화 파일로부터 복구
