@@ -3,7 +3,7 @@
 SQL> alter system set control_files = 
 '/u01/app/oracle/oradata/ORCL/controlfile/o1_mf_fwvn95xm_.ctl',
 '/u01/app/oracle/fast_recovery_area/orcl/ORCL/controlfile/o1_mf_fwvn96cd_.ctl',
-'/home/oracle/control_OOO.ctl' scope = spfile;
+'/home/oracle/control_ksk.ctl' scope = spfile;
 
 2. DB 종료
 SQL> shut immediate
@@ -12,9 +12,9 @@ SQL> shut immediate
 SQL> !
 $] cd /u01/app/oracle/oradata/ORCL/controlfile
 $] ls
-$] cp o1_mf_fwvn95xm_.ctl /home/oracle/control_OOO.ctl
+$] cp o1_mf_fwvn95xm_.ctl /home/oracle/control_ksk.ctl
 $] cd /home/oracle
-$] ls              => control_OOO.ctl 존재 여부 확인
+$] ls              => control_ksk.ctl 존재 여부 확인
 $] exit
 
 4. DB 시작
@@ -27,3 +27,4 @@ SQL> select name
      from v$controlfile;    => 3개의 controlfile 확인!
 
 
+74p 아카이브 변경
