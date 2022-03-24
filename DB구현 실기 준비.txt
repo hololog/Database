@@ -1,0 +1,17 @@
+<DB구현 평가 안내>
+- 평가일자 : 4월 1일(금) 오후 수업
+- 필기 + 실기
+- 준비물 : Oracle 실습가이드북
+         가상 PC
+         실기 준비 작업 3가지 
+
+<DB구현 실기 준비>
+1. Controlfile 다중화
+=> /home/oracle/control_OOO.ctl (본인이름 약자)
+=> (필기 메모장 참고) 33. controlfile 다중화.txt 
+
+2. DB를 Archive log mode로 설정
+=> 교재 p74 참고
+
+3. Table 생성하기
+=> DB구현(테이블생성 실기시험 준비하기).pdf 의 테이블 설계 참고
