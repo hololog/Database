@@ -1,0 +1,20 @@
+<Controlfile 손실 시 복구>
+[전제조건] Controlfile이 다중화되어 있음.
+         그 중 하나가 손실된 경우
+
+show parameter control_files실행후 
+아래의 폴더와 매칭 비교해 보고 손상되서 없으면 복사해서 복구하기
+
+
+1. DB 종료
+SQL> shut abort
+
+2. 남아있는 Member를 사용해서 손실된 Member 복구
+SQL> !
+$] cp /u01/.../o1_mf_fwvn95xm_.ctl  /u01/app/oracle/fast.../o1_mf_fwvn96cd_.ctl
+$] cd /u01/app/oracle/fast_recovery_area/orcl/ORCL/controlfile
+$] ls
+$] exit
+
+3. DB 시작
+SQL> startup
