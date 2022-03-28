@@ -1,0 +1,36 @@
+<Controlfile의 다중화 목적>
+- 다중화된 멤버 손실 시 다른 멤버가 남아 있더라도 DB 작동 멈춤.
+- 목적 : Controlfile 손실 시 최신시점으로 복구하기 위한 목적
+
+<Redologfile의 다중화 목적>
+- 다중화된 멤버 손실 시 다른 멤버가 남아 있다면 DB 작동에 지장을 주지 않음.
+- 목적 : DB 작동이 멈추는 경우를 줄이기 위한 목적
+
+<Datafile 손실 시 복구>
+[case 1] Non-critical Datafile(일반 Datafile) 손실 시 복구
+** user01.dbf (file# : 2) 손실된 경우
+(DB 켜는 중)				(DB 켜져있는 중)
+1. startup 시 mount O, open X		1. DB open 상태임
+2. 손실된 Datafile Offline 시킴		2. 손실된 Datafile Offline 시킴
+S> alter database datafile 2 offline;	SQL> alter database datafile 2
+3. DB open 시킴(DB 가용성)			     offline immediate;
+S> alter database open;			3. DB open 유지함(DB 가용성)
+4. restore : 손실된 Datafile만 복원
+$] cp /home/oracle/backup/user01.dbf  /u01/app/.../datafile/user01.dbf
+5. recover : 복원된 Datafile만 복구(부분 DB 복구)
+SQL> recover datafile 2;
+6. 복구가 완료된 Datafile Online 시킴
+SQL> alter database datafile 2 online;
+
+[case 2] Critical Datafile(필수 Datafile - system, undo) 손실 시 복구
+** system01.dbf (file# : 1) 손실된 경우
+1. DB 종료
+SQL> shut abort
+2. DB mount 시킴
+SQL> startup mount
+3. restore : 손실된 Datafile만 복원
+$] cp /home/oracle/backup/system01.dbf  /u01/app/.../datafile/system01.dbf
+4. recover : 모든 Datafile 복구(전체 DB 복구)
+SQL> recover database;
+5. DB open 시킴
+SQL> alter database open;
