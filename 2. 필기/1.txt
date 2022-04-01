@@ -1,0 +1,172 @@
+1) DBCA
+
+2)
+Datafiles
+Controlfile
+Redologfiles
+
+3)
+3
+
+4)
+2 ORACLE_HOME
+
+
+5)
+1 - PMON
+2 - DB buffer cache
+3 - Redologfiles
+4 - DBWR
+5 - Controlfiles
+
+6)
+2 nomount
+
+7)
+spfileSID.ora
+
+8)
+1 abort
+2 immediate
+3 transactional
+4 normal
+
+9)
+create user arron
+identified by asas1234
+default tablespace users
+temporary tablespace temp
+quota 50M on users
+quota 20M on example;
+
+10)
+1  v$controlfile
+2  v$database
+3  v$datafile
+
+
+11)
+ㄴ , ㄱ , ㄹ , ㄷ
+
+12)
+1. with admin option
+2. 안된다
+
+13)
+1. with grant option
+2. 된다
+
+14)
+v$session
+
+15)
+alter system kill session '256, 53596' immediate;
+
+16)
+3 , 2 , 1
+
+17)
+개념적 모델링
+
+18)
+1 - B
+2 - A
+3 - D
+4 - C
+
+19)
+create table dept(
+    deptno number(2) constraint detp_no_pk primary key,
+    dname varchar2(14) constraint detp_name_nn not null,
+    loc varchar2(13),
+    create_date date default SYSDATE
+);
+
+20)
+1 인덱스
+
+
+===============실기==================================================================
+1>
+-- Tablespace를 생성하는 SQL구문을 작성하시오.
+CREATE TABLESPACE seongki
+DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/seongki01.dbf' size 30M
+AUTOEXTEND ON NEXT 10M MAXSIZE 500M;
+
+
+--- v$tablespace 데이터 딕셔너리 뷰의 name 컬럼을 조회하고 첨부하시오.
+select name
+from v$tablespace;
+
+
+2>
+show PARAMETER db_block_size
+
+3>
+CREATE USER arron
+IDENTIFIED BY happy200
+DEFAULT TABLESPACE seongki
+TEMPORARY TABLESPACE temp
+QUOTA 20M ON seongki;
+
+4>
+GRANT CREATE SESSION, CREATE TABLE
+TO arron;
+
+5>
+GRANT SELECT ON employees TO arron;
+
+6>
+select name from v$controlfile;
+
+7>
+select group#, member from v$logfile;
+
+8>
+archive log list
+
+9>
+create TABLE members_OOO(
+    member_id number(10) constraint member_id_pk primary key,
+    member_name varchar2(25) constraint member_name_nn not null,
+    join_date date constraint member_join_nn not null,
+    address varchar2(50),
+    phone varchar2(15) constraint member_ph_nn not null
+                       constraint member_ph_uk unique,
+    email varchar2(20) constraint member_email_uk unique
+);
+
+
+
+
+==조회할때 사용 ======================
+select  a.constraint_name, a.constraint_type, a.search_condition, a.r_constraint_name
+from user_constraints a join user_cons_columns b
+on a.constraint_name = b.constraint_name
+where a.table_name = 'MEMBERS_OOO';
+====================================
+
+
+
+
+
+10>
+create TABLE products_OOO(
+   prod_num number(10) constraint prod_num_pk primary key,
+   prod_name varchar2(25) constraint prod_name_nn not null,
+   price number(20) constraint prod_price_ck check (price>0),
+   color varchar2(10) constraint prod_color_ck check (color in('red','orange','yellow','green','blue')),
+   create_date date
+);
+
+
+
+
+==조회할때 사용======================
+select  a.constraint_name, a.constraint_type, a.search_condition, a.r_constraint_name
+from user_constraints a join user_cons_columns b
+on a.constraint_name = b.constraint_name
+where a.table_name = 'PRODUCTS_OOO';
+====================================
+
+
