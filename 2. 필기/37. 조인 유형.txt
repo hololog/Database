@@ -1,0 +1,23 @@
+inner join	vs	outer join
+-내부조인			-외부조인
+-조인조건을 만족하는 행만	-조인조건을 만족하는 행과
+ 반환해주는 조인 유형	 만족하지 않는 행까지
+-on절 join		 반환해주는 조인 유형
+			-left outer join
+			 right outer join
+			 full outer join 
+
+===============================================
+
+equi join 	vs	non-equi join
+-조인조건에 동등연산자(=)가	-조인조건에 동등연산자가 아닌
+ 사용된 조인 유형		 그 외 비교연산자가 사용된
+-on절(=) join		 조인 유형
+			-on절(=이 아닌 비교연산자) join
+
+
+
+
+
+
+

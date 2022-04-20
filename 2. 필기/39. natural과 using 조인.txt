@@ -1,0 +1,13 @@
+		컬럼명	데이터타입
+Natural join	 =  	   =
+Using절 join	 =	상관없음
+On절 join	상관없음	상관없음
+
+[문법]
+from departments natural join locations
+
+from departments join locations
+using (location_id)
+
+from departments join locations
+on departments.location_id = locations.location_id
